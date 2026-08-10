@@ -168,7 +168,7 @@
     .stat { padding: 4px 26px; border-left: 3px solid var(--sc, #3f3f46); }
     .stat:first-child { padding-left: 20px; }
     .stat-label { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 15px; }
-    .stat-val { font-size: 40px; font-weight: 700; margin: 8px 0 6px; letter-spacing: -0.02em; }
+    .stat-val { font-size: 24px; line-height: 32px; font-weight: 700; margin: 8px 0 6px; letter-spacing: -0.02em; }
     .stat-sub { color: var(--muted); font-size: 14px; }
 
     /* -------- Section titles -------- */
@@ -288,7 +288,7 @@
     .geo-row .gval { position: relative; z-index: 1; color: var(--muted); }
 
     /* info hover note */
-    .ihint { position: relative; display: inline-flex; align-items: center; vertical-align: middle; margin-left: 8px; color: var(--muted-2); cursor: help; }
+    .ihint { position: relative; display: inline-flex; align-items: center; vertical-align: middle; margin-left: 8px; color: var(--muted-2); cursor: pointer; }
     .ihint:hover { color: var(--muted); }
     .ihint-box { position: absolute; top: calc(100% + 8px); left: 0; width: 300px; max-width: 62vw; background: #1c1c22; border: 1px solid var(--border-strong); border-radius: 10px; padding: 11px 13px; font-size: 13px; font-weight: 400; line-height: 1.5; letter-spacing: normal; color: #d4d4d8; box-shadow: 0 12px 34px rgba(0,0,0,0.5); display: none; z-index: 40; }
     .ihint:hover .ihint-box { display: block; }
@@ -509,7 +509,13 @@
       <section class="card card-pad">
         <div class="sec-row">
           <div class="sec-title">Performance <span class="ihint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><span class="ihint-box">Traffic, spend and conversions on one date axis - the markers are recorded changes to this campaign.</span></span></div>
-          <button class="ask-sm" data-ask="Performance"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l1.5 4.2L18 9l-4.5 1.8L12 15l-1.5-4.2L6 9l4.5-1.8L12 3z"/></svg> Ask Lunio</button>
+          <div style="display:flex; align-items:center; gap:14px">
+            <div class="filter-wrap">
+              <button class="filter-btn" id="perfFilterBtn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M6 12h12M10 18h4"/></svg> Charts <span class="fc"></span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+              <div class="filter-menu" id="perfFilterMenu"></div>
+            </div>
+            <button class="ask-sm" data-ask="Performance"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l1.5 4.2L18 9l-4.5 1.8L12 15l-1.5-4.2L6 9l4.5-1.8L12 3z"/></svg> Ask Lunio</button>
+          </div>
         </div>
 
         <div class="chart-block">
@@ -632,7 +638,7 @@
                 <span class="mod-tools"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M21 3l-8 8M9 21H3v-6M3 21l8-8"/></svg></span>
               </div>
               <div class="toggle-group geo-toggle" style="margin-bottom:12px"><button class="on" data-geo="map">Map</button><button data-geo="rank">Ranking</button></div>
-              <div class="geo-map" data-geo-view="map"><svg id="geoSvg" viewBox="0 0 320 170" width="100%" height="100%"></svg></div>
+              <div class="geo-map" data-geo-view="map"><svg id="geoSvg" viewBox="0 0 324 300" preserveAspectRatio="xMidYMid meet" width="100%" height="100%"></svg></div>
               <div class="geo-rank" data-geo-view="rank" id="geoRank" style="display:none"></div>
             </div>
 
@@ -1157,21 +1163,21 @@
     var svg = document.getElementById("geoSvg");
     // scatter faint dots as a world-ish silhouette
     var blobs = [
-      // [cx, cy, rx, ry, hot]
-      [70,70,34,20,true],   // N America (highlighted)
-      [95,110,16,20,false], // S America
-      [150,68,20,14,false], // Europe
-      [168,105,26,26,false],// Africa
-      [225,80,44,26,false], // Asia
-      [250,128,14,8,false]  // Australia
+      // [cx, cy, rx, ry, hot, dots] — laid out to fill the ~square map area
+      [80,95,45,48,true,150],    // N America (highlighted red)
+      [115,225,24,48,false,110], // S America
+      [180,78,22,20,false,70],   // Europe
+      [196,195,32,50,false,150], // Africa
+      [258,105,52,45,false,170], // Asia
+      [288,245,22,16,false,60]   // Australia
     ];
     blobs.forEach(function(b){
-      var hot = b[4];
-      for(var i=0;i<90;i++){
+      var hot = b[4], count = b[5];
+      for(var i=0;i<count;i++){
         var a = Math.random()*Math.PI*2, r = Math.sqrt(Math.random());
         var x = b[0] + Math.cos(a)*r*b[2];
         var y = b[1] + Math.sin(a)*r*b[3];
-        svg.appendChild(el("circle",{cx:x.toFixed(1),cy:y.toFixed(1),r:1,fill:hot?"#ef4444":"#3a3a40",opacity:hot?0.9:0.6}));
+        svg.appendChild(el("circle",{cx:x.toFixed(1),cy:y.toFixed(1),r:1.1,fill:hot?"#ef4444":"#3a3a40",opacity:hot?0.9:0.6}));
       }
     });
   })();
@@ -1494,6 +1500,50 @@
   document.addEventListener("click", function (e) { if (!menu.contains(e.target) && !btn.contains(e.target)) menu.classList.remove("open"); });
   updateCount();
   updateRail();
+})();
+
+// ---- "Charts" filter: choose which Performance charts to show ----
+(function () {
+  var btn = document.getElementById("perfFilterBtn");
+  var menu = document.getElementById("perfFilterMenu");
+  if (!btn || !menu) return;
+  var countEl = btn.querySelector(".fc");
+  var tick = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 6"/></svg>';
+  var items = [];
+
+  var head = document.createElement("div");
+  head.className = "fm-head";
+  head.innerHTML = '<span class="fm-title">CHARTS</span><span class="fm-actions"><button class="fm-act" data-all="1">All</button><button class="fm-act" data-all="0">None</button></span>';
+  menu.appendChild(head);
+
+  function setOn(rec, on) { rec.on = on; rec.item.classList.toggle("on", on); rec.block.style.display = on ? "" : "none"; }
+  function updateCount() { countEl.textContent = items.filter(function (r) { return r.on; }).length + "/" + items.length; }
+
+  var section = btn.closest("section");
+  [].slice.call(section.querySelectorAll(".chart-block")).forEach(function (block) {
+    var nameEl = block.querySelector(".chart-name");
+    if (!nameEl) return;
+    var it = document.createElement("div");
+    it.className = "fm-item on";
+    it.innerHTML = '<span class="fm-check">' + tick + '</span><span>' + nameEl.textContent.trim() + '</span>';
+    menu.appendChild(it);
+    var rec = { block: block, item: it, on: true };
+    items.push(rec);
+    it.addEventListener("click", function (e) { e.stopPropagation(); setOn(rec, !rec.on); updateCount(); });
+  });
+
+  head.querySelectorAll(".fm-act").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var on = a.getAttribute("data-all") === "1";
+      items.forEach(function (r) { setOn(r, on); });
+      updateCount();
+    });
+  });
+
+  btn.addEventListener("click", function (e) { e.stopPropagation(); menu.classList.toggle("open"); });
+  document.addEventListener("click", function (e) { if (!menu.contains(e.target) && !btn.contains(e.target)) menu.classList.remove("open"); });
+  updateCount();
 })();
 </script>
 </body>

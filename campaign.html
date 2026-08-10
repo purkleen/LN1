@@ -142,7 +142,7 @@
     .back:hover { color: var(--text); }
     .head-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
     .title-row { display: flex; align-items: center; gap: 14px; margin: 14px 0 12px; flex-wrap: wrap; }
-    .camp-title { font-size: 30px; font-weight: 700; margin: 14px 0 12px; letter-spacing: -0.01em; }
+    .camp-title { font-size: 21px; font-weight: 700; margin: 14px 0 12px; letter-spacing: -0.01em; }
     .title-row .camp-title { margin: 0; }
     .chips { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
     .chip {
@@ -172,7 +172,13 @@
     .stat-sub { color: var(--muted); font-size: 14px; }
 
     /* -------- Section titles -------- */
-    .sec-title { font-size: 20px; font-weight: 600; }
+    .sec-title { font-size: 14px; line-height: 20px; font-weight: 600; }
+    .perf-section { max-height: 700px; overflow: hidden; }
+    .perf-section .chart-block { margin-top: 14px; }
+    .perf-section #clicksChart { height: 196px; }
+    .perf-section #spendChart { height: 128px; }
+    .perf-section #convChart { height: 118px; }
+    .perf-section #convAxis { height: 18px; }
     .sec-desc { color: var(--muted); margin-top: 6px; font-size: 14px; max-width: 900px; }
 
     /* -------- Charts -------- */
@@ -198,7 +204,7 @@
     .axis { fill: var(--muted-2); font-size: 11px; font-family: inherit; }
 
     /* -------- Budget / waterfall -------- */
-    .budget-legend { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px 26px; }
+    .budget-legend { display: grid; grid-template-columns: repeat(10, 1fr); gap: 20px 16px; }
     .wt { cursor: pointer; user-select: none; border-radius: 8px; transition: opacity .12s; }
     .wt:hover .wt-name { color: #d4d4d8; }
     .wt-name { color: var(--muted); font-size: 13px; }
@@ -213,7 +219,7 @@
     .control { display: flex; align-items: center; gap: 10px; }
     .control > span { color: var(--muted); font-size: 13px; }
 
-    .sankey { position: relative; margin-top: 14px; height: 430px; }
+    .sankey { position: relative; margin-top: 16px; height: 430px; }
     .sankey svg { position: absolute; inset: 0; width: 100%; height: 100%; }
     .sk-head { position: absolute; font-size: 11px; letter-spacing: .14em; color: var(--muted-2); pointer-events: none; }
     .sk-lab { position: absolute; font-size: 12.5px; white-space: nowrap; color: var(--muted); pointer-events: none; }
@@ -488,12 +494,12 @@
             <div class="stat-sub">in the selected period</div>
           </div>
           <div class="stat" style="--sc:var(--red)">
-            <div class="stat-label">Waste detected <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></div>
+            <div class="stat-label">Waste detected <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></div>
             <div class="stat-val">$63.1K</div>
             <div class="stat-sub">57.6% of spend</div>
           </div>
           <div class="stat" style="--sc:var(--orange)">
-            <div class="stat-label">Still recoverable <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></div>
+            <div class="stat-label">Still recoverable <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></div>
             <div class="stat-val">$23.2K</div>
             <div class="stat-sub">with protection on</div>
           </div>
@@ -506,9 +512,9 @@
       </section>
 
       <!-- ============ PERFORMANCE ============ -->
-      <section class="card card-pad">
+      <section class="card card-pad perf-section">
         <div class="sec-row">
-          <div class="sec-title">Performance <span class="ihint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><span class="ihint-box">Traffic, spend and conversions on one date axis - the markers are recorded changes to this campaign.</span></span></div>
+          <div class="sec-title">Performance <span class="ihint"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><span class="ihint-box">Traffic, spend and conversions on one date axis - the markers are recorded changes to this campaign.</span></span></div>
           <div style="display:flex; align-items:center; gap:14px">
             <div class="filter-wrap">
               <button class="filter-btn" id="perfFilterBtn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M6 12h12M10 18h4"/></svg> Charts <span class="fc"></span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
@@ -549,7 +555,7 @@
       <!-- ============ WHERE BUDGET GOES ============ -->
       <section class="card card-pad">
         <div class="sec-row">
-          <div class="sec-title">Where this budget goes <span class="ihint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><span class="ihint-box">This campaign's share of every waste type the account detects, and how much of it is already recovered. Budget here is clicks x effective CPC - the basis the account waterfall totals spend on, so the bars line up with the hub.</span></span></div>
+          <div class="sec-title">Where this budget goes <span class="ihint"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><span class="ihint-box">This campaign's share of every waste type the account detects, and how much of it is already recovered. Budget here is clicks x effective CPC - the basis the account waterfall totals spend on, so the bars line up with the hub.</span></span></div>
           <button class="ask-sm" data-ask="Where this spend goes"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l1.5 4.2L18 9l-4.5 1.8L12 15l-1.5-4.2L6 9l4.5-1.8L12 3z"/></svg> Ask Lunio</button>
         </div>
 
@@ -587,7 +593,7 @@
             <div class="mod">
               <div class="mod-head">
                 <span class="mod-title">Keyword waste</span>
-                <span class="mod-info"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
+                <span class="mod-info"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
                 <span class="pill-sample">1K sample</span>
                 <span class="mod-tools">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h11M4 12h7M4 17h13M17 4l3 3-3 3M20 14l-3 3 3 3" opacity=".85"/></svg>
@@ -603,7 +609,7 @@
             <div class="mod">
               <div class="mod-head">
                 <span class="mod-title">Search term waste</span>
-                <span class="mod-info"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
+                <span class="mod-info"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
                 <span class="mod-tools">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h11M4 12h7M4 17h13M17 4l3 3-3 3M20 14l-3 3 3 3" opacity=".85"/></svg>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M21 3l-8 8M9 21H3v-6M3 21l8-8"/></svg>
@@ -622,7 +628,7 @@
             <div class="mod">
               <div class="mod-head">
                 <span class="mod-title">Attack timing</span>
-                <span class="mod-info"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
+                <span class="mod-info"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
                 <span class="pill-sample">1K sample</span>
                 <span class="mod-tools"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M21 3l-8 8M9 21H3v-6M3 21l8-8"/></svg></span>
               </div>
@@ -633,7 +639,7 @@
             <div class="mod">
               <div class="mod-head">
                 <span class="mod-title">Geo waste</span>
-                <span class="mod-info"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
+                <span class="mod-info"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
                 <span class="pill-sample">1K sample</span>
                 <span class="mod-tools"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M21 3l-8 8M9 21H3v-6M3 21l8-8"/></svg></span>
               </div>
@@ -646,7 +652,7 @@
             <div class="mod">
               <div class="mod-head">
                 <span class="mod-title">Device waste</span>
-                <span class="mod-info"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
+                <span class="mod-info"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
                 <span class="pill-sample">1K sample</span>
                 <span class="mod-tools"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M21 3l-8 8M9 21H3v-6M3 21l8-8"/></svg></span>
               </div>
@@ -666,7 +672,7 @@
             <div class="mod">
               <div class="mod-head">
                 <span class="mod-title">Change history annotations</span>
-                <span class="mod-info"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
+                <span class="mod-info"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
                 <span class="mod-tools"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M21 3l-8 8M9 21H3v-6M3 21l8-8"/></svg></span>
               </div>
               <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px">
@@ -680,7 +686,7 @@
             <div class="mod">
               <div class="mod-head">
                 <span class="mod-title">Invalid click reasons</span>
-                <span class="mod-info"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
+                <span class="mod-info"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
                 <span class="pill-sample">1K sample</span>
                 <span class="mod-tools"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M21 3l-8 8M9 21H3v-6M3 21l8-8"/></svg></span>
               </div>
@@ -865,163 +871,165 @@
     });
   })();
 
-  // ---- Sankey (faithful reproduction of the source geometry) ----
+  // ---- Sankey (generative: re-flows evenly when waste types are filtered) ----
   (function(){
     var svg = document.getElementById("sankeySvg");
+    var box = document.getElementById("skLabels");
+    var wrap = document.getElementById("sankey");
+    var tip = document.createElement("div"); tip.className = "sk-tip"; wrap.appendChild(tip);
+
     var NC = {
       budget:"#8b7ff0", leadQuality:"#b0873c", creative:"#d43f9a", invalidTraffic:"#ef4444",
       signalLoss:"#3f74e0", postClick:"#a3e635", agentic:"#22d3ee", intent:"#14b8a6",
       bidding:"#f0a91e", brandSafety:"#8a8a92", other:"#6b7280", cleanSpend:"#22c55e",
       recovered:"#22c55e", recoverable:"#e0a340", unrecoverable:"#ef4444"
     };
-    // ribbons: [d, strokeWidth, sourceKey, targetKey, side]  side 'L'(10->647) 'R'(657->1294)
-    var R = [
-      ["M10,22.66 C328.5,22.66 328.5,22.66 647,22.66",5.31,"budget","leadQuality","L"],
-      ["M10,26.65 C328.5,26.65 328.5,58.15 647,58.15",2.67,"budget","creative","L"],
-      ["M10,28.82 C328.5,28.82 328.5,91.82 647,91.82",1.67,"budget","invalidTraffic","L"],
-      ["M10,30.30 C328.5,30.30 328.5,124.80 647,124.80",1.29,"budget","signalLoss","L"],
-      ["M10,31.54 C328.5,31.54 328.5,157.54 647,157.54",1.20,"budget","postClick","L"],
-      ["M10,32.74 C328.5,32.74 328.5,190.24 647,190.24",1.19,"budget","agentic","L"],
-      ["M10,33.93 C328.5,33.93 328.5,222.93 647,222.93",1.19,"budget","intent","L"],
-      ["M10,35.01 C328.5,35.01 328.5,255.51 647,255.51",1.00,"budget","bidding","L"],
-      ["M10,35.85 C328.5,35.85 328.5,287.85 647,287.85",1.00,"budget","brandSafety","L"],
-      ["M10,37.06 C328.5,37.06 328.5,320.56 647,320.56",1.72,"budget","other","L"],
-      ["M10,45.46 C328.5,45.46 328.5,360.46 647,360.46",15.08,"budget","cleanSpend","L"],
-      ["M657,91.36 C975.5,91.36 975.5,20.37 1294,20.37",1.00,"invalidTraffic","recovered","R"],
-      ["M657,222.43 C975.5,222.43 975.5,20.84 1294,20.84",1.00,"intent","recovered","R"],
-      ["M657,255.10 C975.5,255.10 975.5,21.01 1294,21.01",1.00,"bidding","recovered","R"],
-      ["M657,287.55 C975.5,287.55 975.5,21.14 1294,21.14",1.00,"brandSafety","recovered","R"],
-      ["M657,20.93 C975.5,20.93 975.5,53.63 1294,53.63",1.86,"leadQuality","recoverable","R"],
-      ["M657,57.28 C975.5,57.28 975.5,55.02 1294,55.02",1.00,"creative","recoverable","R"],
-      ["M657,92.19 C975.5,92.19 975.5,55.95 1294,55.95",1.00,"invalidTraffic","recoverable","R"],
-      ["M657,124.38 C975.5,124.38 975.5,56.64 1294,56.64",1.00,"signalLoss","recoverable","R"],
-      ["M657,223.02 C975.5,223.02 975.5,57.36 1294,57.36",1.00,"intent","recoverable","R"],
-      ["M657,255.58 C975.5,255.58 975.5,58.27 1294,58.27",1.00,"bidding","recoverable","R"],
-      ["M657,287.90 C975.5,287.90 975.5,58.98 1294,58.98",1.00,"brandSafety","recoverable","R"],
-      ["M657,23.59 C975.5,23.59 975.5,92.50 1294,92.50",3.45,"leadQuality","unrecoverable","R"],
-      ["M657,58.62 C975.5,58.62 975.5,95.10 1294,95.10",1.74,"creative","unrecoverable","R"],
-      ["M657,125.02 C975.5,125.02 975.5,96.39 1294,96.39",1.00,"signalLoss","unrecoverable","R"],
-      ["M657,157.54 C975.5,157.54 975.5,97.41 1294,97.41",1.20,"postClick","unrecoverable","R"],
-      ["M657,190.24 C975.5,190.24 975.5,98.60 1294,98.60",1.19,"agentic","unrecoverable","R"],
-      ["M657,320.56 C975.5,320.56 975.5,100.06 1294,100.06",1.72,"other","unrecoverable","R"]
-    ];
-    var defs = el("defs", {});
-    svg.appendChild(defs);
-    var visPaths = [];
-    R.forEach(function(r, i){
-      var x1 = r[4] === "L" ? 10 : 657, x2 = r[4] === "L" ? 647 : 1294;
-      var g = el("linearGradient", {id:"skg"+i, gradientUnits:"userSpaceOnUse", x1:x1, y1:0, x2:x2, y2:0});
-      g.appendChild(el("stop", {offset:"0%", "stop-color":NC[r[2]]}));
-      g.appendChild(el("stop", {offset:"100%", "stop-color":NC[r[3]]}));
-      defs.appendChild(g);
-      var vp = el("path", {d:r[0], fill:"none", stroke:"url(#skg"+i+")", "stroke-width":r[1], opacity:0.8});
-      vp.style.transition = "opacity .12s ease, stroke-width .12s ease";
-      svg.appendChild(vp);
-      visPaths.push(vp);
-    });
-    // nodes
-    var nodeByKey = {};
-    function node(x, y, h, key){ var rc = el("rect", {x:x, y:y, width:10, height:h, rx:1.5, fill:NC[key]}); rc.style.transition = "opacity .12s ease"; svg.appendChild(rc); nodeByKey[key] = rc; }
-    node(0, 20, 33, "budget");
-    var mid = [[20,5.3,"leadQuality"],[56.8,2.7,"creative"],[91,1.7,"invalidTraffic"],[124.2,1.3,"signalLoss"],
-      [156.9,1.2,"postClick"],[189.6,1.2,"agentic"],[222.3,1.2,"intent"],[255,1.0,"bidding"],
-      [287.5,0.7,"brandSafety"],[319.7,1.7,"other"],[352.9,15.1,"cleanSpend"]];
-    mid.forEach(function(n){ node(647, n[0], n[1], n[2]); });
-    [[20,1.2,"recovered"],[52.7,6.6,"recoverable"],[90.8,10.1,"unrecoverable"]].forEach(function(n){ node(1294, n[0], n[1], n[2]); });
-
-    // labels
-    var box = document.getElementById("skLabels");
-    function lab(html, top, right, cls){
-      var d = document.createElement("div");
-      d.className = "sk-lab" + (cls ? " " + cls : "");
-      d.style.top = top + "%"; d.style.right = right; d.style.textAlign = "right";
-      d.style.transform = "translateY(-50%)";
-      d.innerHTML = html;
-      box.appendChild(d);
-      return d;
-    }
-    var waste = [["Lead quality","$18.7K",13.69,"leadQuality"],["Creative","$9.4K",22.22,"creative"],["Invalid traffic","$5.9K",30.43,"invalidTraffic"],
-      ["Signal loss","$4.5K",38.40,"signalLoss"],["Post-click","$4.2K",46.26,"postClick"],["Agentic traffic","$4.2K",54.11,"agentic"],
-      ["Intent","$4.2K",62.07,"intent"],["Bidding","$3.4K",69.93,"bidding"],["Brand safety","$2.5K",77.78,"brandSafety"],
-      ["Other","$6.1K",85.63,"other"],["Clean spend","$53.1K",95.17,"cleanSpend"]];
-    waste.forEach(function(w){
-      var d = lab(w[0] + " " + w[1], w[2], "auto");
-      d.style.left = "49.6%"; d.style.right = "auto"; d.style.textAlign = "left";
-      d.style.transform = "translateY(-108%)";   // sit just above its line
-      d.setAttribute("data-lk", w[3]);
-    });
-    lab("Recovered <b>$4.2K</b>", 13.04, "1.2%", "b").style.transform = "translateY(-108%)";
-    lab("Recoverable <b>$23.2K</b>", 20.94, "1.2%", "b").style.transform = "translateY(-108%)";
-    lab("Unrecoverable $35.7K", 30.14, "1.2%").style.transform = "translateY(-108%)";
-
-    // ---- hover: highlight the flow, dim the rest, show a tooltip ----
     var names = {budget:"Total spend",leadQuality:"Lead quality",creative:"Creative",invalidTraffic:"Invalid traffic",
       signalLoss:"Signal loss",postClick:"Post-click",agentic:"Agentic traffic",intent:"Intent",bidding:"Bidding",
       brandSafety:"Brand safety",other:"Other",cleanSpend:"Clean spend",recovered:"Recovered",
       recoverable:"Recoverable",unrecoverable:"Unrecoverable"};
-    var wrap = document.getElementById("sankey");
-    var tip = document.createElement("div"); tip.className = "sk-tip"; wrap.appendChild(tip);
-    // ---- selection state driven by the legend checkboxes ----
-    var hidden = {}, hitPaths = [];
-    function wkOf(i){ var r = R[i]; return r[2] === "budget" ? r[3] : r[2]; }   // the waste type a ribbon belongs to
-    function baseOp(i){ return hidden[wkOf(i)] ? 0 : 0.8; }
-    function applyBase(){
-      visPaths.forEach(function(p, i){ p.setAttribute("opacity", baseOp(i)); p.setAttribute("stroke-width", R[i][1]); p.style.display = baseOp(i) === 0 ? "none" : ""; });
-      hitPaths.forEach(function(h, i){ if (h) h.style.pointerEvents = baseOp(i) === 0 ? "none" : ""; });
-      Object.keys(nodeByKey).forEach(function(k){ nodeByKey[k].style.display = hidden[k] ? "none" : ""; });
-      box.querySelectorAll("[data-lk]").forEach(function(el){ el.style.display = hidden[el.getAttribute("data-lk")] ? "none" : ""; });
+
+    // waste types, in order, each with its recovery split ($K to recovered/recoverable/unrecoverable)
+    var WASTE = [
+      {key:"leadQuality",   label:"Lead quality",   disp:"$18.7K", val:18.7, split:{recoverable:8.0, unrecoverable:10.7}},
+      {key:"creative",      label:"Creative",        disp:"$9.4K",  val:9.4,  split:{recoverable:3.4, unrecoverable:6.0}},
+      {key:"invalidTraffic",label:"Invalid traffic", disp:"$5.9K",  val:5.9,  split:{recovered:1.0, recoverable:2.0, unrecoverable:2.9}},
+      {key:"signalLoss",    label:"Signal loss",     disp:"$4.5K",  val:4.5,  split:{recoverable:2.0, unrecoverable:2.5}},
+      {key:"postClick",     label:"Post-click",      disp:"$4.2K",  val:4.2,  split:{unrecoverable:4.2}},
+      {key:"agentic",       label:"Agentic traffic", disp:"$4.2K",  val:4.2,  split:{unrecoverable:4.2}},
+      {key:"intent",        label:"Intent",          disp:"$4.2K",  val:4.2,  split:{recovered:1.2, recoverable:3.0}},
+      {key:"bidding",       label:"Bidding",         disp:"$3.4K",  val:3.4,  split:{recovered:1.0, recoverable:2.4}},
+      {key:"brandSafety",   label:"Brand safety",    disp:"$2.5K",  val:2.5,  split:{recovered:1.0, recoverable:1.5}},
+      {key:"other",         label:"Other",           disp:"$6.1K",  val:6.1,  split:{recoverable:0.9, unrecoverable:5.2}}
+    ];
+    var CLEAN = {key:"cleanSpend", label:"Clean spend", disp:"$53.1K", val:53.1};
+    var REC = [
+      {key:"recovered",     label:"Recovered",     bold:true},
+      {key:"recoverable",   label:"Recoverable",   bold:true},
+      {key:"unrecoverable", label:"Unrecoverable", bold:false}
+    ];
+
+    var BUD_H = 33, Y_TOP = 20, Y_BOT = 360, BUD_TOP = 20, REC_TOP = 20, REC_GAP = 31.5;
+    function fmtK(v){ return "$" + (Math.round(v * 10) / 10).toFixed(1) + "K"; }
+    var hidden = {};
+    function topPct(y){ return ((y + 34) / 414 * 100).toFixed(2); }
+    var arrow = ' <span class="ar">&rarr;</span> ';
+
+    function render(){
+      svg.innerHTML = ""; box.innerHTML = "";
+      var defs = el("defs", {}); svg.appendChild(defs);
+      var gid = 0;
+
+      var visWaste = WASTE.filter(function(w){ return !hidden[w.key]; });
+      var mids = visWaste.concat([CLEAN]);        // middle column = visible waste + clean spend
+      var n = mids.length;
+      var centers = {};
+      mids.forEach(function(m, i){
+        centers[m.key] = n === 1 ? (Y_TOP + Y_BOT) / 2 : Y_TOP + (Y_BOT - Y_TOP) * i / (n - 1);
+      });
+
+      // dynamic scale: the visible flows renormalize to fill the fixed budget node,
+      // so remaining path thicknesses grow/shrink to reflect what's selected
+      var visibleTotal = 0; mids.forEach(function(m){ visibleTotal += m.val; });
+      var SCALE = BUD_H / visibleTotal;
+
+      // recovery $ totals from visible waste, then stack them (heights reflect SCALE)
+      var recTot = {recovered:0, recoverable:0, unrecoverable:0};
+      visWaste.forEach(function(w){ for (var rk in w.split) recTot[rk] += w.split[rk]; });
+      var recLayout = {}, ry = REC_TOP;
+      REC.forEach(function(r){
+        var h = recTot[r.key] * SCALE;
+        recLayout[r.key] = {top:ry, h:h, center:ry + h/2, tot:recTot[r.key]};
+        ry += h + REC_GAP;
+      });
+
+      // build flow list: budget -> each mid, then each waste -> recovery
+      var flows = [], budCum = 0;
+      mids.forEach(function(m){
+        var fh = m.val * SCALE;
+        flows.push({src:"budget", tgt:m.key, w:fh, srcY:BUD_TOP + budCum + fh/2, tgtY:centers[m.key], x1:10, x2:647});
+        budCum += fh;
+      });
+      var recIn = {recovered:0, recoverable:0, unrecoverable:0};
+      visWaste.forEach(function(w){
+        var wc = centers[w.key], wh = w.val * SCALE, outCum = 0;
+        ["recovered","recoverable","unrecoverable"].forEach(function(rk){
+          var amt = w.split[rk]; if (!amt) return;
+          var fh = amt * SCALE, rl = recLayout[rk];
+          flows.push({src:w.key, tgt:rk, w:fh, srcY:wc - wh/2 + outCum + fh/2, tgtY:rl.top + recIn[rk] + fh/2, x1:657, x2:1294});
+          outCum += fh; recIn[rk] += fh;
+        });
+      });
+
+      // draw ribbons
+      var paths = [];
+      flows.forEach(function(f){
+        var g = el("linearGradient", {id:"skg"+gid, gradientUnits:"userSpaceOnUse", x1:f.x1, y1:0, x2:f.x2, y2:0});
+        g.appendChild(el("stop", {offset:"0%", "stop-color":NC[f.src]}));
+        g.appendChild(el("stop", {offset:"100%", "stop-color":NC[f.tgt]}));
+        defs.appendChild(g);
+        var cx = (f.x1 + f.x2) / 2;
+        var d = "M" + f.x1 + "," + f.srcY.toFixed(2) + " C" + cx + "," + f.srcY.toFixed(2) + " " + cx + "," + f.tgtY.toFixed(2) + " " + f.x2 + "," + f.tgtY.toFixed(2);
+        var p = el("path", {d:d, fill:"none", stroke:"url(#skg"+gid+")", "stroke-width":Math.max(f.w, 0.6).toFixed(2), opacity:0.8});
+        p.style.transition = "opacity .12s ease, stroke-width .12s ease";
+        svg.appendChild(p); paths.push(p); f.d = d; gid++;
+      });
+
+      // nodes
+      function node(x, y, h, key){ svg.appendChild(el("rect", {x:x, y:y.toFixed(2), width:10, height:Math.max(h, 0.8).toFixed(2), rx:1.5, fill:NC[key]})); }
+      node(0, BUD_TOP, BUD_H, "budget");
+      mids.forEach(function(m){ node(647, centers[m.key] - m.val * SCALE / 2, m.val * SCALE, m.key); });
+      REC.forEach(function(r){ var rl = recLayout[r.key]; if (rl.h > 0.15) node(1294, rl.top, rl.h, r.key); });
+
+      // labels (above each line)
+      function lab(html, y, side, cls){
+        var d = document.createElement("div");
+        d.className = "sk-lab" + (cls ? " " + cls : "");
+        d.style.top = topPct(y) + "%"; d.style.transform = "translateY(-108%)";
+        if (side === "L") { d.style.left = "1.2%"; d.style.textAlign = "left"; }
+        else if (side === "M") { d.style.left = "49.6%"; d.style.textAlign = "left"; }
+        else { d.style.right = "1.2%"; d.style.textAlign = "right"; }
+        d.innerHTML = html; box.appendChild(d); return d;
+      }
+      lab('<span class="mut">Total spend</span> <b>' + fmtK(visibleTotal) + '</b>', BUD_TOP, "L");
+      mids.forEach(function(m){ lab(m.label + " " + m.disp, centers[m.key], "M"); });
+      REC.forEach(function(r){ var rl = recLayout[r.key]; if (rl.h > 0.15) lab(r.label + (r.bold ? " <b>" + fmtK(rl.tot) + "</b>" : " " + fmtK(rl.tot)), rl.center, "R", r.bold ? "b" : ""); });
+
+      // hover: highlight the full spend -> waste -> recovery path, show tooltip
+      flows.forEach(function(f, i){
+        var hit = el("path", {d:f.d, fill:"none", stroke:"#000", "stroke-opacity":"0", "stroke-width":Math.max(f.w, 16), "stroke-linecap":"butt"});
+        hit.style.cursor = "pointer"; svg.appendChild(hit);
+        var group = [i], tipHtml;
+        if (f.src === "budget") {
+          flows.forEach(function(ff, j){ if (ff.src === f.tgt) group.push(j); });
+          tipHtml = names.budget + arrow + names[f.tgt] + ' <b>$' + (f.w / SCALE).toFixed(1) + 'K</b>';
+        } else {
+          flows.forEach(function(ff, j){ if (ff.src === "budget" && ff.tgt === f.src) group.push(j); });
+          tipHtml = names.budget + arrow + names[f.src] + arrow + names[f.tgt] + ' <b>$' + (f.w / SCALE).toFixed(1) + 'K</b>';
+        }
+        hit.addEventListener("mouseenter", function(){
+          paths.forEach(function(p, k){ p.setAttribute("opacity", group.indexOf(k) >= 0 ? "1" : "0.06"); });
+          group.forEach(function(k){ paths[k].setAttribute("stroke-width", (Math.max(flows[k].w, 0.6) + 0.9).toFixed(2)); });
+          tip.innerHTML = tipHtml; tip.style.display = "block";
+        });
+        hit.addEventListener("mousemove", function(e){ var rc = wrap.getBoundingClientRect(); tip.style.left = (e.clientX - rc.left) + "px"; tip.style.top = (e.clientY - rc.top) + "px"; });
+        hit.addEventListener("mouseleave", function(){
+          paths.forEach(function(p, k){ p.setAttribute("opacity", "0.8"); p.setAttribute("stroke-width", Math.max(flows[k].w, 0.6).toFixed(2)); });
+          tip.style.display = "none";
+        });
+      });
     }
 
-    var arrow = ' <span class="ar">&rarr;</span> ';
-    R.forEach(function(r, i){
-      var hit = el("path", {d:r[0], fill:"none", stroke:"#000", "stroke-opacity":"0",
-        "stroke-width":Math.max(r[1], 16), "stroke-linecap":"butt"});
-      hit.style.cursor = "pointer";
-      svg.appendChild(hit);
-      hitPaths[i] = hit;
-
-      // full path: spend -> waste type -> recovery
-      var group = [i], tipHtml;
-      if (r[2] === "budget") {
-        // left ribbon (spend -> waste): light up every onward recovery ribbon from this waste
-        R.forEach(function(rr, j){ if (rr[2] === r[3]) group.push(j); });
-        tipHtml = names.budget + arrow + names[r[3]] + ' <b>$' + (r[1] * 3.521).toFixed(1) + 'K</b>';
-      } else {
-        // right ribbon (waste -> recovery): light up the spend -> waste segment feeding it
-        R.forEach(function(rr, j){ if (rr[2] === "budget" && rr[3] === r[2]) group.push(j); });
-        tipHtml = names.budget + arrow + names[r[2]] + arrow + names[r[3]] + ' <b>$' + (r[1] * 3.521).toFixed(1) + 'K</b>';
-      }
-
-      hit.addEventListener("mouseenter", function(){
-        if (baseOp(i) === 0) return;                        // this flow is toggled off
-        visPaths.forEach(function(p, k){
-          p.setAttribute("opacity", baseOp(k) === 0 ? 0 : (group.indexOf(k) >= 0 ? "1" : "0.06"));
-        });
-        group.forEach(function(k){ if (baseOp(k) > 0) visPaths[k].setAttribute("stroke-width", R[k][1] + 0.9); });
-        tip.innerHTML = tipHtml;
-        tip.style.display = "block";
-      });
-      hit.addEventListener("mousemove", function(e){
-        var rc = wrap.getBoundingClientRect();
-        tip.style.left = (e.clientX - rc.left) + "px";
-        tip.style.top = (e.clientY - rc.top) + "px";
-      });
-      hit.addEventListener("mouseleave", function(){
-        applyBase();
-        tip.style.display = "none";
-      });
-    });
-
-    // legend swatches act as checkboxes that select what shows on the Sankey
+    // legend swatches act as checkboxes; toggling re-flows the Sankey evenly
     document.querySelectorAll(".wt[data-key]").forEach(function(wt){
       wt.addEventListener("click", function(){
         var k = wt.getAttribute("data-key");
         hidden[k] = !hidden[k];
         wt.classList.toggle("off", !!hidden[k]);
-        applyBase();
+        render();
       });
     });
-    applyBase();
+    render();
   })();
 
   // ---- Keyword waste ----
@@ -1423,7 +1431,7 @@
     "Recent receipts": "Executed actions from the value ledger that mention this campaign.",
     "Change history": "Recorded changes to this campaign within the selected period."
   };
-  var infoSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>';
+  var infoSvg = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>';
   document.querySelectorAll(".modules .mod").forEach(function (card) {
     var title = card.querySelector(".mod-title");
     if (!title) return;

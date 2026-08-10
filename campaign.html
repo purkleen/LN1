@@ -23,6 +23,7 @@
       --green: #22c55e;
       --cyan: #22d3ee;
       --radius: 14px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
     }
 
     * { box-sizing: border-box; }
@@ -138,6 +139,75 @@
 
     .content { padding: 24px 48px 48px; display: flex; flex-direction: column; gap: 18px; }
 
+    /* Where it leaks */
+    .leaks-sub { color: var(--muted); font-size: 12px; margin-top: 6px; max-width: 560px; }
+    .leaks-sample { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: var(--muted-2); white-space: nowrap; }
+    .leaks-tabs { display: flex; gap: 4px; margin-top: 18px; }
+    .leaks-tab { font-family: var(--mono); font-size: 12.5px; padding: 9px 16px; color: var(--muted); background: transparent; border: 1px solid transparent; border-radius: 8px 8px 0 0; cursor: pointer; position: relative; margin-bottom: -1px; z-index: 2; }
+    .leaks-tab:hover { color: #fff; }
+    .leaks-tab.on { color: #fff; background: var(--panel-inset); border-color: var(--border-strong); border-bottom-color: var(--panel-inset); }
+    .leaks-box { border: 1px solid var(--border-strong); border-radius: 0 10px 10px 10px; background: var(--panel-inset); overflow: hidden; }
+    .leaks-head, .leaks-row { display: grid; grid-template-columns: minmax(0,1fr) 150px 230px 110px 40px; align-items: center; padding-left: 18px; padding-right: 18px; }
+    .leaks-head { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: var(--muted-2); padding-top: 13px; padding-bottom: 13px; border-bottom: 1px solid var(--border); }
+    .leaks-row { padding-top: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--border); }
+    .lk-name { font-family: var(--mono); font-size: 13.5px; color: #ececec; }
+    .lk-tag { display: inline-block; margin-top: 9px; font-family: var(--mono); font-size: 11px; color: var(--muted); border: 1px solid var(--border-strong); border-radius: 6px; padding: 3px 9px; }
+    .lk-tag.prob { border-style: dashed; }
+    .lk-spend { font-family: var(--mono); font-weight: 700; color: #f87171; font-size: 14.5px; text-align: right; padding-right: 30px; }
+    .lk-bar { height: 7px; background: #26262a; border-radius: 2px; overflow: hidden; }
+    .lk-bar i { display: block; height: 100%; background: #dc2626; }
+    .lk-pct { font-family: var(--mono); font-size: 11.5px; color: var(--muted); text-align: right; margin-top: 6px; }
+    .lk-clicks { font-family: var(--mono); font-size: 13px; color: #ddd; text-align: right; padding-right: 10px; }
+    .lk-plus { color: var(--muted-2); text-align: right; font-family: var(--mono); }
+    .leaks-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding: 13px 18px; font-family: var(--mono); font-size: 11px; letter-spacing: .06em; color: var(--muted-2); }
+    .leaks-open { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0; color: #ddd; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+    .leaks-open:hover { color: #fff; }
+
+    /* What to do */
+    .todo-card { border: 1px solid var(--border-strong); border-radius: 12px; background: var(--panel-inset); padding: 20px 22px; margin-top: 14px; display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap; }
+    .todo-card.primary { border-color: rgba(255,255,255,0.45); }
+    .todo-title { font-size: 15px; font-weight: 600; }
+    .todo-desc { color: var(--muted); font-size: 12.5px; line-height: 1.55; margin-top: 8px; max-width: 560px; }
+    .todo-meta { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; color: var(--muted-2); margin-top: 13px; }
+    .todo-right { display: flex; flex-direction: column; align-items: flex-end; gap: 13px; flex: 0 0 auto; margin-left: auto; }
+    .todo-gain { font-family: var(--mono); font-weight: 700; font-size: 21px; color: #4ade80; line-height: 1; text-align: right; }
+    .todo-gain small { display: block; font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; color: var(--muted-2); font-weight: 400; margin-top: 5px; }
+    .todo-foot { border: 1px dashed var(--border-strong); border-radius: 12px; padding: 16px 20px; margin-top: 14px; font-size: 13px; color: #d4d4d8; }
+    .todo-foot b { color: #fff; }
+    .todo-foot .mono-line { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 10px; }
+
+    /* What it did (value ledger) */
+    .ledger { margin-top: 20px; }
+    .ledger-item { position: relative; padding: 0 0 26px 32px; }
+    .ledger-item::before { content: ""; position: absolute; left: 6px; top: 16px; bottom: -4px; width: 1px; background: var(--border-strong); }
+    .ledger-item:last-child::before { display: none; }
+    .ledger-dot { position: absolute; left: 0; top: 3px; width: 13px; height: 13px; border-radius: 50%; background: #4ade80; border: 2px solid #4ade80; }
+    .ledger-dot.open { background: transparent; border-color: var(--muted-2); }
+    .ledger-date { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: var(--muted-2); }
+    .ledger-title { font-size: 15px; font-weight: 600; margin-top: 6px; }
+    .ledger-meta { font-family: var(--mono); font-size: 12.5px; color: var(--muted); margin-top: 7px; }
+    .ledger-meta b { color: #4ade80; font-weight: 700; }
+    .ledger-card { border: 1px solid var(--border-strong); border-radius: 12px; background: var(--panel-inset); padding: 18px 20px; }
+    .ledger-card-title { font-size: 14px; font-weight: 600; }
+    .ledger-stats { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; margin-top: 16px; }
+    .ls-label { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: var(--muted-2); }
+    .ls-val { font-family: var(--mono); font-size: 19px; font-weight: 700; color: #fff; margin-top: 8px; }
+    .ls-val s { color: var(--muted-2); font-weight: 400; margin-right: 8px; }
+    .ls-val.green { color: #4ade80; }
+    .ledger-note { border-top: 1px solid var(--border); margin-top: 16px; padding-top: 13px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+    .ledger-note u { text-underline-offset: 3px; }
+    .ledger-empty { border: 1px dashed var(--border-strong); border-radius: 12px; padding: 16px 20px; margin-top: 14px; max-width: 620px; }
+    .ledger-empty b { font-size: 13.5px; }
+    .ledger-empty p { color: var(--muted); font-size: 12.5px; margin: 8px 0 0; line-height: 1.5; }
+
+    /* hidden per design: Performance section + "module by module" block */
+    .perf-section, .modrow, .modules { display: none !important; }
+
+    /* hero statement */
+    .hero-statement { font-size: 26px; line-height: 1.35; font-weight: 600; letter-spacing: -0.01em; color: #fff; max-width: 1020px; padding: 4px 2px 0; }
+    .hero-statement .hs-red { color: #ef4444; }
+    .hero-statement .hs-amber { color: var(--orange); }
+
     .card {
       background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
     }
@@ -181,10 +251,10 @@
     /* -------- Section titles -------- */
     .sec-title { font-size: 14px; line-height: 20px; font-weight: 600; }
     .perf-section { max-height: 700px; overflow: hidden; }
-    .perf-section .chart-block { margin-top: 14px; }
-    .perf-section #clicksChart { height: 180px; }
-    .perf-section #spendChart { height: 112px; }
-    .perf-section #convChart { height: 106px; }
+    .perf-section .chart-block { margin-top: 12px; }
+    .perf-section #clicksChart { height: 150px; }
+    .perf-section #spendChart { height: 88px; }
+    .perf-section #convChart { height: 84px; }
     .sec-desc { color: var(--muted); margin-top: 6px; font-size: 14px; max-width: 900px; }
 
     /* -------- Charts -------- */
@@ -368,6 +438,19 @@
     .mod-tools .ask-ico { color: var(--purple-bright); }
     .mod-tools .ask-ico:hover { color: var(--purple); }
 
+    /* AI summary strip with actionable items */
+    .ai-sum { display: flex; gap: 12px; margin-top: 16px; padding: 12px 14px; border-radius: 10px; background: rgba(139,92,246,0.07); border: 1px solid rgba(139,92,246,0.22); }
+    .ai-sum-ico { color: var(--purple-bright); flex: 0 0 16px; margin-top: 1px; }
+    .ai-sum-body { display: flex; flex-direction: column; gap: 9px; min-width: 0; }
+    .ai-sum-txt { font-size: 12.5px; line-height: 1.5; color: #d4d4d8; }
+    .ai-sum-txt b { color: var(--purple-bright); font-weight: 600; }
+    .ai-sum-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+    .ai-act { display: inline-flex; align-items: center; gap: 7px; padding: 5px 11px; border-radius: 999px; border: 1px solid rgba(139,92,246,0.35); background: transparent; color: #d4d4d8; font-size: 12px; cursor: pointer; }
+    .ai-act:hover { background: rgba(139,92,246,0.15); color: #fff; }
+    .ai-act svg { color: var(--purple-bright); }
+    .ai-sum-close { margin-left: auto; align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; background: none; border: none; padding: 2px 4px; color: var(--muted); font-size: 12px; cursor: pointer; white-space: nowrap; }
+    .ai-sum-close:hover { color: #fff; }
+
     /* section filter dropdown */
     .filter-wrap { position: relative; }
     .filter-btn { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--panel-2); color: #d4d4d8; font-size: 13px; font-weight: 500; cursor: pointer; }
@@ -501,6 +584,9 @@
     </div>
 
     <div class="content">
+      <!-- ============ HERO STATEMENT ============ -->
+      <div class="hero-statement">Of the $109.5K this campaign spent,<br><span class="hs-red">57.6% went to traffic that was never going to convert.</span> <span class="hs-amber">$23.2K of it is still yours to keep.</span></div>
+
       <!-- ============ HEADER CARD ============ -->
       <section class="card card-pad">
         <div class="head-top">
@@ -558,6 +644,19 @@
           </div>
         </div>
 
+        <div class="ai-sum">
+          <svg class="ai-sum-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6L12 3z"/><path d="M18 14l.8 2.2L21 17l-2.2.8L18 20l-.8-2.2L15 17l2.2-.8L18 14z"/></svg>
+          <div class="ai-sum-body">
+            <span class="ai-sum-txt"><b>Lunio summary</b> &mdash; Clicks are steady at ~3K/day but 19.6% stay invalid (~570 wasted clicks daily). Conversions track spend closely, so cutting waste lowers your $61.7 CPA directly.</span>
+            <div class="ai-sum-actions">
+              <button class="ai-act" data-ask="Attack timing windows"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> Block Wed&ndash;Thu evening attack windows</button>
+              <button class="ai-act" data-ask="Negatives pack"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg> Add negatives pack (saves ~$300/mo)</button>
+              <button class="ai-act" data-ask="Protection plan"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-3z"/></svg> Protect campaign to stabilize CPA</button>
+            </div>
+          </div>
+          <button class="ai-sum-close" aria-label="Dismiss summary"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg> Close</button>
+        </div>
+
         <div class="chart-block">
           <div class="chart-head">
             <div class="chart-name">Clicks per day</div>
@@ -598,6 +697,19 @@
           </div>
         </div>
 
+        <div class="ai-sum">
+          <svg class="ai-sum-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6L12 3z"/><path d="M18 14l.8 2.2L21 17l-2.2.8L18 20l-.8-2.2L15 17l2.2-.8L18 14z"/></svg>
+          <div class="ai-sum-body">
+            <span class="ai-sum-txt"><b>Lunio summary</b> &mdash; $63.1K of the $116.2K spend is waste (57.6%). Lead quality drives 30% of it, and $23.2K is still recoverable with protection on.</span>
+            <div class="ai-sum-actions">
+              <button class="ai-act" data-ask="Protection plan"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-3z"/></svg> Turn on protection &mdash; reclaim up to $23.2K</button>
+              <button class="ai-act" data-ask="Lead quality waste"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg> Fix Lead quality leaks ($8.0K recoverable)</button>
+              <button class="ai-act" data-ask="Creative waste"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg> Review Creative targeting ($9.4K waste)</button>
+            </div>
+          </div>
+          <button class="ai-sum-close" aria-label="Dismiss summary"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg> Close</button>
+        </div>
+
         <div class="divider" style="margin-top:18px"></div>
 
         <div class="budget-legend" id="budgetLegend"></div>
@@ -608,6 +720,118 @@
           <div class="sk-head" style="left:49.6%; top:0">WASTE</div>
           <div class="sk-head" style="right:0; top:0; text-align:right">RECOVERY</div>
           <div id="skLabels"></div>
+        </div>
+      </section>
+
+      <!-- ============ WHERE IT LEAKS ============ -->
+      <section class="card card-pad leaks-section">
+        <div class="sec-row" style="align-items:flex-start">
+          <div>
+            <div class="sec-title">Where it leaks</div>
+            <div class="leaks-sub">Ranked by wasted spend, never click count. Open any row to see the clicks behind it.</div>
+          </div>
+          <span class="leaks-sample">SAMPLED FROM 1,000 CLICKS</span>
+        </div>
+        <div class="leaks-tabs" id="leaksTabs"></div>
+        <div class="leaks-box" id="leaksBox"></div>
+      </section>
+
+      <!-- ============ WHAT TO DO ============ -->
+      <section class="card card-pad todo-section">
+        <div class="sec-row" style="align-items:flex-start">
+          <div>
+            <div class="sec-title">What to do</div>
+            <div class="leaks-sub">Each action carries the dollars it's projected to return, so you're choosing between amounts rather than guessing. All are reversible.</div>
+          </div>
+          <span class="leaks-sample">SCOPE: THIS CAMPAIGN</span>
+        </div>
+
+        <div class="todo-card primary">
+          <div>
+            <div class="todo-title">Add negatives pack</div>
+            <div class="todo-desc">Blocks the 42 search terms above that have never produced a conversion in 90 days.</div>
+            <div class="todo-meta">LIVE IN ~4 MIN &middot; REVERSIBLE &middot; TOUCHES 1 AD GROUP</div>
+          </div>
+          <div class="todo-right">
+            <div class="todo-gain">+$8.4K<small>NEXT 30 DAYS</small></div>
+            <button class="btn primary" data-ask="Negatives pack">Add negatives pack</button>
+          </div>
+        </div>
+
+        <div class="todo-card">
+          <div>
+            <div class="todo-title">Block 3 datacentre regions</div>
+            <div class="todo-desc">Ashburn, Council Bluffs and The Dalles are hosting providers, not customers. No human traffic will be lost.</div>
+            <div class="todo-meta">LIVE IMMEDIATELY &middot; REVERSIBLE &middot; IP-LEVEL, NOT GEO-TARGETING</div>
+          </div>
+          <div class="todo-right">
+            <div class="todo-gain">+$7.2K<small>NEXT 30 DAYS</small></div>
+            <button class="btn" data-ask="Datacentre regions">Block regions</button>
+          </div>
+        </div>
+
+        <div class="todo-card">
+          <div>
+            <div class="todo-title">Turn on headless browser protection</div>
+            <div class="todo-desc">Catches automated sessions the platform's own filter is currently passing through.</div>
+            <div class="todo-meta">LIVE IN ~15 MIN &middot; REVERSIBLE &middot; 0.3% FALSE-POSITIVE RATE</div>
+          </div>
+          <div class="todo-right">
+            <div class="todo-gain">+$3.0K<small>NEXT 30 DAYS</small></div>
+            <button class="btn" data-ask="Protection plan">Turn on protection</button>
+          </div>
+        </div>
+
+        <div class="todo-foot">
+          All three recover <b>$18.6K of the $23.2K</b> still open &mdash; and pull cost per conversion to <b>$29.80</b>.
+          <div class="mono-line">$4.6K stays out of reach until brand terms are split out.</div>
+        </div>
+      </section>
+
+      <!-- ============ WHAT IT DID ============ -->
+      <section class="card card-pad ledger-section">
+        <div class="sec-row" style="align-items:flex-start">
+          <div>
+            <div class="sec-title">What it did</div>
+            <div class="leaks-sub">Every action taken here, with the measured before and after. This is what makes the projections above worth believing.</div>
+          </div>
+          <span class="leaks-sample">VALUE LEDGER</span>
+        </div>
+
+        <div class="ledger">
+          <div class="ledger-item">
+            <span class="ledger-dot open"></span>
+            <div class="ledger-date">JUL 10, 2026</div>
+            <div class="ledger-title">Paused campaign</div>
+            <div class="ledger-meta">Measuring &mdash; first read Jul 17</div>
+          </div>
+          <div class="ledger-item">
+            <span class="ledger-dot"></span>
+            <div class="ledger-date">JUN 28, 2026</div>
+            <div class="ledger-title">Added 42 negative keywords</div>
+            <div class="ledger-meta">Waste rate 61.3% &rarr; 57.6% &middot; <b>$4.9K/mo recovered</b></div>
+          </div>
+          <div class="ledger-item">
+            <span class="ledger-dot"></span>
+            <div class="ledger-date">JUN 14, 2026</div>
+            <div class="ledger-title">Turned on protection for search partners</div>
+            <div class="ledger-meta">Invalid clicks 214/day &rarr; 88/day &middot; <b>$7.9K/mo recovered</b></div>
+          </div>
+        </div>
+
+        <div class="ledger-card">
+          <div class="ledger-card-title">What those two actions moved at the top of this page</div>
+          <div class="ledger-stats">
+            <div><div class="ls-label">WASTE RATE</div><div class="ls-val"><s>61.3%</s>57.6%</div></div>
+            <div><div class="ls-label">INVALID CLICKS PER DAY</div><div class="ls-val"><s>214</s>88</div></div>
+            <div><div class="ls-label">RECOVERED TO DATE</div><div class="ls-val green">$12.8K</div></div>
+          </div>
+          <div class="ledger-note">&#8635; This is the amber band in <u>Where this budget goes</u>. Take an action in <u>What to do</u> and it lands here, then moves that band.</div>
+        </div>
+
+        <div class="ledger-empty">
+          <b>No budget or bid changes recorded in this range.</b>
+          <p>Annotate a change and it appears on every chart in Lunio, so your edits stay separable from ours.</p>
         </div>
       </section>
 
@@ -1440,6 +1664,113 @@ var WORLD_OTHER=["M428.8 108.9 430.6 109.7 432.3 108.5 434.7 107.4 435.1 105.7 4
     });
   })();
 
+  // ---- Where it leaks: tabbed waste table ----
+  (function(){
+    var tabsEl = document.getElementById("leaksTabs");
+    var boxEl = document.getElementById("leaksBox");
+    if (!tabsEl || !boxEl) return;
+    var TABS = [
+      {name:"Search terms", col:"SEARCH TERM", style:"bars", foot:"TOP 10 OF 214 WASTING SEARCH TERMS", rows:[
+        ["debt consolidation loan reviews","Repeat clicker","$6,240",9.9,"412"],
+        ["free debt help now","Datacentre IP","$4,810",7.6,"388"],
+        ["consolidate my debt bad credit","Headless browser","$3,930",6.2,"291"],
+        ["government debt relief program","No intent match","$2,710",4.3,"244"],
+        ["loan calculator","No intent match","$2,140",3.4,"506"],
+        ["how to consolidate credit cards","Repeat clicker","$1,870",3.0,"233"],
+        ["debt consolidation no credit check","Datacentre IP","$1,650",2.6,"198"],
+        ["best debt consolidation companies","Headless browser","$1,410",2.2,"176"],
+        ["debt settlement vs consolidation","No intent match","$1,180",1.9,"149"],
+        ["free credit repair","Outside targeting","$960",1.5,"131"]
+      ]},
+      {name:"Keywords", col:"KEYWORD", style:"bars", metaFmt:"% of waste", foot:"TOP 10 OF 61 KEYWORDS IN THIS AD GROUP", rows:[
+        ["+debt +consolidation","Broad match drift","$11,420",18.1,"904"],
+        ["&quot;debt help&quot;","Repeat clicker","$7,880",12.5,"661"],
+        ["debt relief","Datacentre IP","$5,120",8.1,"473"],
+        ["consolidate loans","Headless browser","$3,640",5.8,"302"],
+        ["credit card debt","Repeat clicker","$2,290",3.6,"218"],
+        ["+loan +consolidation","Broad match drift","$1,980",3.1,"187"],
+        ["&quot;debt relief program&quot;","Datacentre IP","$1,720",2.7,"164"],
+        ["personal loan debt","No intent match","$1,450",2.3,"139"],
+        ["[debt consolidation loan]","Repeat clicker","$1,210",1.9,"118"],
+        ["credit counseling","Outside targeting","$980",1.6,"102"]
+      ]},
+      {name:"Locations", col:"LOCATION", foot:"TOP 5 OF 38 LOCATIONS &middot; 3 ARE DATACENTRE REGIONS", rows:[
+        ["Ashburn, Virginia","Datacentre IP","$8,910",14.1,"688"],
+        ["Council Bluffs, Iowa","Datacentre IP","$5,470",8.7,"421"],
+        ["Ho Chi Minh City, Vietnam","Outside targeting","$4,020",6.4,"512"],
+        ["The Dalles, Oregon","Datacentre IP","$3,180",5.0,"246"],
+        ["Mumbai, India","Outside targeting","$2,640",4.2,"398"]
+      ]},
+      {name:"Devices", col:"DEVICE", foot:"SAMPLED FROM 1,000 CLICKS &middot; 72 INVALID", rows:[
+        ["Computer","Headless browser","$14,600",23.1,"36"],
+        ["Mobile","Repeat clicker","$9,340",14.8,"26"],
+        ["Tablet","Datacentre IP","$3,110",4.9,"10"]
+      ]},
+      {name:"Reasons", col:"WHY IT WAS FLAGGED", style:"bars", bar:"purple", colName:"Reason", rightHead:"Clicks", right:"clicks", metaFmt:"% share", foot:"EVERY CLASSIFICATION IS DRILLABLE IN ANALYZE", rows:[
+        ["Datacentre IP","Certain","$17,830",28.2,"1,084"],
+        ["Repeat clicker, 8+ per day","Certain","$12,270",19.4,"866"],
+        ["Headless browser signature","Certain","$9,640",15.3,"642"],
+        ["Impossible travel between clicks","Probable","$7,110",11.3,"428"],
+        ["Outside targeted region","Certain","$5,660",9.0,"511"],
+        ["Pre-fetch / crawler request","Certain","$3,480",5.5,"297"],
+        ["Automation framework detected","Certain","$2,650",4.2,"214"],
+        ["Shared proxy IP","Probable","$1,830",2.9,"168"],
+        ["Atypical session depth","Probable","$1,290",2.0,"122"],
+        ["Repeated identical user agent","Certain","$920",1.5,"96"]
+      ]}
+    ];
+    var active = 0;
+    function render(){
+      tabsEl.innerHTML = "";
+      TABS.forEach(function(t, i){
+        var b = document.createElement("button");
+        b.className = "leaks-tab" + (i === active ? " on" : "");
+        b.textContent = t.name;
+        b.addEventListener("click", function(){ active = i; render(); });
+        tabsEl.appendChild(b);
+      });
+      var t = TABS[active];
+      var html;
+      if (t.style === "bars") {
+        // module-card look: same bar rows as the "module by module" cards
+        var maxShare = Math.max.apply(null, t.rows.map(function(r){ return r[3]; }));
+        var colName = t.colName || (t.col.charAt(0) + t.col.slice(1).toLowerCase());
+        html = '<div style="padding:8px 16px 0">' +
+          '<div class="tbl-head"><span>' + colName + '</span><span>' + (t.rightHead || "Waste") + '</span></div>';
+        t.rows.forEach(function(r){
+          var fw = 20 + (r[3] / maxShare) * 72;
+          html += '<div class="rowwrap">' +
+            '<div class="bar-row ' + (t.bar || "red") + '" style="flex:1">' +
+              '<div class="fill" style="width:' + fw.toFixed(1) + '%"></div>' +
+              '<span class="lbl">' + r[0] + '</span>' +
+              (t.metaFmt ? '<span class="meta">' + r[3] + t.metaFmt + '</span>' : '') +
+            '</div>' +
+            '<span class="row-count" style="width:64px">' + (t.right === "clicks" ? r[4] : r[2]) + '</span>' +
+          '</div>';
+        });
+        html += '</div>';
+      } else {
+        html = '<div class="leaks-head"><span>' + t.col + '</span>' +
+          '<span style="text-align:right;padding-right:30px">WASTED SPEND</span>' +
+          '<span>SHARE OF WASTE</span>' +
+          '<span style="text-align:right;padding-right:10px">CLICKS</span><span></span></div>';
+        t.rows.forEach(function(r){
+          var prob = r[1] === "Probable";
+          html += '<div class="leaks-row">' +
+            '<div><div class="lk-name">' + r[0] + '</div><span class="lk-tag' + (prob ? ' prob' : '') + '">' + r[1] + '</span></div>' +
+            '<div class="lk-spend">' + r[2] + '</div>' +
+            '<div><div class="lk-bar"><i style="width:' + (r[3] / 32 * 100).toFixed(1) + '%"></i></div><div class="lk-pct">' + r[3] + '%</div></div>' +
+            '<div class="lk-clicks">' + r[4] + '</div>' +
+            '<div class="lk-plus">+</div>' +
+          '</div>';
+        });
+      }
+      html += '<div class="leaks-foot"><span>' + t.foot + '</span><span class="leaks-open">View all rows</span></div>';
+      boxEl.innerHTML = html;
+    }
+    render();
+  })();
+
   // ---- Device donut ----
   (function(){
     var svg = document.getElementById("donut");
@@ -1486,6 +1817,14 @@ function animateLayout(fn) {
   if (document.startViewTransition) { document.startViewTransition(fn); } else { fn(); }
 }
 
+// ---- dismissable Lunio summaries ----
+document.addEventListener("click", function (e) {
+  var c = e.target.closest(".ai-sum-close");
+  if (!c) return;
+  var strip = c.closest(".ai-sum");
+  animateLayout(function () { strip.style.display = "none"; });
+});
+
 // ---- Ask Lunio: side-panel assistant ----
 (function () {
   var panel = document.getElementById("aiPanel");
@@ -1510,7 +1849,13 @@ function animateLayout(fn) {
     "Change history annotations": "No account changes are recorded in this window, so nothing is annotated on the time series yet.",
     "Invalid click reasons": "Headless-browser fingerprints (19%) and click-frequency anomalies (16%) dominate. Every classification is explainable — drill any click in Analyze.",
     "Recent receipts": "The latest action is the Jul 10 pause of this campaign — currently in the measuring phase.",
-    "Change history": "No recorded changes for this campaign in the selected period."
+    "Change history": "No recorded changes for this campaign in the selected period.",
+    "Protection plan": "Turning protection on filters invalid clicks at click time — no pausing needed. It would make $23.2K of the $63.1K detected waste recoverable; the fastest wins are Lead quality ($8.0K) and Intent ($3.0K).",
+    "Lead quality waste": "Lead quality is the largest leak: $18.7K, 30% of all waste, with $8.0K recoverable. Start with the 19%-invalid keywords 'startup funding' and 'invoice factoring'.",
+    "Creative waste": "Creative accounts for $9.4K (15% of waste), of which $3.4K is recoverable. Rotating the two lowest-performing assets and tightening placements would recover most of it.",
+    "Attack timing windows": "Invalid traffic concentrates Wed–Thu 16:00–24:00 and Sunday evenings. Scheduling protection or tighter bids in those windows cuts roughly 40% of invalid clicks.",
+    "Negatives pack": "The 'commercial lending rates' cluster wasted $303 across 4 terms. Adding -commercial, -lending and -rates as negatives removes ~80% of that spend — about $300/month.",
+    "Datacentre regions": "Ashburn, Council Bluffs and The Dalles are hosting-provider regions, not customers — $17.6K of waste comes from them. Blocking is IP-level (not geo-targeting), takes effect immediately, is reversible, and loses no human traffic. Projected return: +$7.2K over the next 30 days."
   };
   var suggestions = ["Where is the most waste?", "Draft a negatives pack", "Why are clicks flagged invalid?"];
 
@@ -1638,7 +1983,13 @@ function animateLayout(fn) {
   function byTitle(re) { return sections.filter(function (s) { var t = s.querySelector(".sec-title"); return t && re.test(t.textContent); })[0]; }
   var perf = byTitle(/Performance/);
   var budget = byTitle(/Where this budget goes/);
+  var leaks = byTitle(/Where it leaks/);
+  var todo = byTitle(/What to do/);
+  var did = byTitle(/What it did/);
   if (perf && budget) perf.parentNode.insertBefore(budget, perf);
+  if (perf && leaks) perf.parentNode.insertBefore(leaks, perf);
+  if (perf && todo) perf.parentNode.insertBefore(todo, perf);
+  if (perf && did) perf.parentNode.insertBefore(did, perf);       // budget -> leaks -> what to do -> what it did -> performance
 })();
 
 // ---- hover descriptions on every module card ----

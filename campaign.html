@@ -23,7 +23,7 @@
       --green: #22c55e;
       --cyan: #22d3ee;
       --radius: 14px;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      --mono: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
     * { box-sizing: border-box; }
@@ -142,24 +142,24 @@
     /* Where it leaks */
     .leaks-sub { color: var(--muted); font-size: 12px; margin-top: 6px; max-width: 560px; }
     .leaks-sample { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: var(--muted-2); white-space: nowrap; }
-    .leaks-tabs { display: flex; gap: 4px; margin-top: 18px; }
-    .leaks-tab { font-family: var(--mono); font-size: 12.5px; padding: 9px 16px; color: var(--muted); background: transparent; border: 1px solid transparent; border-radius: 8px 8px 0 0; cursor: pointer; position: relative; margin-bottom: -1px; z-index: 2; }
-    .leaks-tab:hover { color: #fff; }
-    .leaks-tab.on { color: #fff; background: var(--panel-inset); border-color: var(--border-strong); border-bottom-color: var(--panel-inset); }
-    .leaks-box { border: 1px solid var(--border-strong); border-radius: 0 10px 10px 10px; background: var(--panel-inset); overflow: hidden; }
-    .leaks-head, .leaks-row { display: grid; grid-template-columns: minmax(0,1fr) 150px 230px 110px 40px; align-items: center; padding-left: 18px; padding-right: 18px; }
+    .leaks-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 18px; }
+    @media (max-width: 980px) { .leaks-grid { grid-template-columns: 1fr; } }
+    .leaks-card { border: 1px solid var(--border-strong); border-radius: 12px; background: var(--panel-inset); overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+    .leaks-card.wide { grid-column: 1 / -1; }
+    .leaks-card-title { font-family: var(--mono); font-size: 13px; font-weight: 600; color: #fff; padding: 14px 16px 4px; }
+    .leaks-head, .leaks-row { display: grid; grid-template-columns: minmax(0,1fr) 100px 150px 74px 24px; align-items: center; padding-left: 16px; padding-right: 16px; }
     .leaks-head { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: var(--muted-2); padding-top: 13px; padding-bottom: 13px; border-bottom: 1px solid var(--border); }
     .leaks-row { padding-top: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--border); }
     .lk-name { font-family: var(--mono); font-size: 13.5px; color: #ececec; }
     .lk-tag { display: inline-block; margin-top: 9px; font-family: var(--mono); font-size: 11px; color: var(--muted); border: 1px solid var(--border-strong); border-radius: 6px; padding: 3px 9px; }
     .lk-tag.prob { border-style: dashed; }
-    .lk-spend { font-family: var(--mono); font-weight: 700; color: #f87171; font-size: 14.5px; text-align: right; padding-right: 30px; }
+    .lk-spend { font-family: var(--mono); font-weight: 700; color: #f87171; font-size: 14.5px; text-align: right; padding-right: 18px; }
     .lk-bar { height: 7px; background: #26262a; border-radius: 2px; overflow: hidden; }
     .lk-bar i { display: block; height: 100%; background: #dc2626; }
     .lk-pct { font-family: var(--mono); font-size: 11.5px; color: var(--muted); text-align: right; margin-top: 6px; }
     .lk-clicks { font-family: var(--mono); font-size: 13px; color: #ddd; text-align: right; padding-right: 10px; }
     .lk-plus { color: var(--muted-2); text-align: right; font-family: var(--mono); }
-    .leaks-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding: 13px 18px; font-family: var(--mono); font-size: 11px; letter-spacing: .06em; color: var(--muted-2); }
+    .leaks-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding: 13px 16px; margin-top: auto; font-family: var(--mono); font-size: 11px; letter-spacing: .06em; color: #8a8a92; border-top: 1px solid var(--border); }
     .leaks-open { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0; color: #ddd; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
     .leaks-open:hover { color: #fff; }
 
@@ -241,7 +241,7 @@
     .divider { height: 1px; background: var(--border); margin: 22px 0; }
 
     /* -------- Stat cards -------- */
-    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+    .stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; }
     .stat { padding: 4px 26px; border-left: 3px solid var(--sc, #3f3f46); }
     .stat:first-child { padding-left: 20px; }
     .stat-label { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 15px; }
@@ -369,7 +369,7 @@
     .rowwrap { display: flex; align-items: center; gap: 10px; }
 
     .tag { font-size: 12px; color: #d4d4d8; background: var(--panel-2); border: 1px solid var(--border); padding: 4px 9px; border-radius: 6px; }
-    .tag.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; }
+    .tag.mono { font-family: inherit; font-size: 11px; }
     .foot-note { color: var(--muted); font-size: 13px; margin-top: auto; padding-top: 14px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .mod-caption { color: var(--muted); font-size: 12px; margin-top: auto; padding-top: 14px; }
 
@@ -586,7 +586,7 @@
 
     <div class="content">
       <!-- ============ HERO STATEMENT ============ -->
-      <div class="hero-statement">Of the $109.5K this campaign spent,<br><span class="hs-red">57.6% went to traffic that was never going to convert.</span> <span class="hs-amber">$23.2K of it is still yours to keep.</span></div>
+      <div class="hero-statement">This campaign spent $109.5K.<br><span class="hs-red">57.6% went to traffic that was never going to convert.</span> <span class="hs-amber">$23.2K of it is still yours to keep.</span></div>
 
       <!-- ============ HEADER CARD ============ -->
       <section class="card card-pad">
@@ -603,6 +603,7 @@
             <button class="btn primary">Protect campaign</button>
             <button class="btn">Add negatives pack</button>
             <button class="btn">Pause campaign</button>
+            <button class="ask-sm" data-ask=""><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l1.5 4.2L18 9l-4.5 1.8L12 15l-1.5-4.2L6 9l4.5-1.8L12 3z"/></svg> Ask about this campaign</button>
           </div>
         </div>
 
@@ -623,6 +624,11 @@
             <div class="stat-label">Still recoverable <span class="ihint"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span class="ihint-box">The share of detected waste you can still reclaim by turning protection on.</span></span></div>
             <div class="stat-val">$23.2K</div>
             <div class="stat-sub">with protection on</div>
+          </div>
+          <div class="stat" style="--sc:#b91c1c">
+            <div class="stat-label">Unrecoverable <span class="ihint"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span class="ihint-box">Detected waste that can no longer be reclaimed &mdash; spend lost to invalid traffic before protection was in place.</span></span></div>
+            <div class="stat-val">$35.7K</div>
+            <div class="stat-sub">of detected waste</div>
           </div>
           <div class="stat" style="--sc:var(--green)">
             <div class="stat-label">Conversions <span class="ihint"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span class="ihint-box ihint-box--r">Recorded conversions in the selected period, with the average cost per conversion.</span></span></div>
@@ -728,13 +734,12 @@
       <section class="card card-pad leaks-section">
         <div class="sec-row" style="align-items:flex-start">
           <div>
-            <div class="sec-title">Where it leaks</div>
+            <div class="sec-title">Where the waste comes from</div>
             <div class="leaks-sub">Ranked by wasted spend, never click count. Open any row to see the clicks behind it.</div>
           </div>
           <span class="leaks-sample">SAMPLED FROM 1,000 CLICKS</span>
         </div>
-        <div class="leaks-tabs" id="leaksTabs"></div>
-        <div class="leaks-box" id="leaksBox"></div>
+        <div class="leaks-grid" id="leaksGrid"></div>
       </section>
 
       <!-- ============ WHAT TO DO ============ -->
@@ -1667,9 +1672,8 @@ var WORLD_OTHER=["M428.8 108.9 430.6 109.7 432.3 108.5 434.7 107.4 435.1 105.7 4
 
   // ---- Where it leaks: tabbed waste table ----
   (function(){
-    var tabsEl = document.getElementById("leaksTabs");
-    var boxEl = document.getElementById("leaksBox");
-    if (!tabsEl || !boxEl) return;
+    var grid = document.getElementById("leaksGrid");
+    if (!grid) return;
     var TABS = [
       {name:"Search terms", col:"SEARCH TERM", style:"bars", foot:"TOP 10 OF 214 WASTING SEARCH TERMS", rows:[
         ["debt consolidation loan reviews","Repeat clicker","$6,240",9.9,"412"],
@@ -1707,7 +1711,7 @@ var WORLD_OTHER=["M428.8 108.9 430.6 109.7 432.3 108.5 434.7 107.4 435.1 105.7 4
         ["Mobile","Repeat clicker","$9,340",14.8,"26"],
         ["Tablet","Datacentre IP","$3,110",4.9,"10"]
       ]},
-      {name:"Reasons", col:"WHY IT WAS FLAGGED", style:"bars", bar:"purple", colName:"Reason", rightHead:"Clicks", right:"clicks", metaFmt:"% share", foot:"EVERY CLASSIFICATION IS DRILLABLE IN ANALYZE", rows:[
+      {name:"Reasons", col:"WHY IT WAS FLAGGED", style:"bars", bar:"purple", colName:"Reason", rightHead:"Clicks", right:"clicks", metaFmt:"% share", foot:"", rows:[
         ["Datacentre IP","Certain","$17,830",28.2,"1,084"],
         ["Repeat clicker, 8+ per day","Certain","$12,270",19.4,"866"],
         ["Headless browser signature","Certain","$9,640",15.3,"642"],
@@ -1720,17 +1724,7 @@ var WORLD_OTHER=["M428.8 108.9 430.6 109.7 432.3 108.5 434.7 107.4 435.1 105.7 4
         ["Repeated identical user agent","Certain","$920",1.5,"96"]
       ]}
     ];
-    var active = 0;
-    function render(){
-      tabsEl.innerHTML = "";
-      TABS.forEach(function(t, i){
-        var b = document.createElement("button");
-        b.className = "leaks-tab" + (i === active ? " on" : "");
-        b.textContent = t.name;
-        b.addEventListener("click", function(){ active = i; render(); });
-        tabsEl.appendChild(b);
-      });
-      var t = TABS[active];
+    function cardBody(t){
       var html;
       if (t.style === "bars") {
         // module-card look: same bar rows as the "module by module" cards
@@ -1766,10 +1760,17 @@ var WORLD_OTHER=["M428.8 108.9 430.6 109.7 432.3 108.5 434.7 107.4 435.1 105.7 4
           '</div>';
         });
       }
-      html += '<div class="leaks-foot"><span>' + t.foot + '</span><span class="leaks-open">View all rows</span></div>';
-      boxEl.innerHTML = html;
+      return html;
     }
-    render();
+    // Reasons leads the section as a full-width row, the rest follow in the grid
+    var ordered = TABS.filter(function(t){ return t.name === "Reasons"; })
+      .concat(TABS.filter(function(t){ return t.name !== "Reasons"; }));
+    var out = "";
+    ordered.forEach(function(t){
+      out += '<div class="leaks-card' + (t.name === "Reasons" ? " wide" : "") + '"><div class="leaks-card-title">' + t.name + '</div>' + cardBody(t) +
+        '<div class="leaks-foot"><span>' + t.foot + '</span><span class="leaks-open">View all rows</span></div></div>';
+    });
+    grid.innerHTML = out;
   })();
 
   // ---- Device donut ----
@@ -1984,7 +1985,7 @@ document.addEventListener("click", function (e) {
   function byTitle(re) { return sections.filter(function (s) { var t = s.querySelector(".sec-title"); return t && re.test(t.textContent); })[0]; }
   var perf = byTitle(/Performance/);
   var budget = byTitle(/Where this budget goes/);
-  var leaks = byTitle(/Where it leaks/);
+  var leaks = byTitle(/Where the waste comes from/);
   var todo = byTitle(/What to do/);
   var did = byTitle(/What it did/);
   if (perf && budget) perf.parentNode.insertBefore(budget, perf);

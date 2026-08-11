@@ -229,6 +229,9 @@
     .chip.live { display: inline-flex; align-items: center; gap: 8px; }
     .chip.live .d { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); }
     .subline { color: var(--muted); margin: 14px 0 0; font-size: 12px; }
+    .subline-link { color: #d4d4d8; text-decoration: underline; text-underline-offset: 3px; margin-right: 8px; }
+    .subline-link:hover { color: #fff; }
+    .chip.sm { padding: 3px 10px; font-size: 11px; vertical-align: middle; margin: 0 2px; }
     .head-actions { display: flex; gap: 10px; flex-wrap: wrap; }
     .btn {
       padding: 10px 16px; border-radius: 9px; font-size: 13px; font-weight: 500; cursor: pointer;
@@ -597,7 +600,7 @@
               <h1 class="camp-title">Debt Consolidation - Broad</h1>
               <span class="chip live"><span class="d"></span> Live</span>
             </div>
-            <p class="subline">Atlas Working Capital · $4.1K/day budget · 9% IS lost to budget</p>
+            <p class="subline"><a href="#" class="subline-link">Atlas Working Capital</a> <span class="chip sm">Search</span> <span class="chip sm"><svg width="11" height="11" viewBox="0 0 24 24" style="vertical-align:-1px; margin-right:5px"><path d="M12 3.6 L5.3 18.2" stroke="#FBBC04" stroke-width="5.6" stroke-linecap="round"/><path d="M12 3.6 L18.7 18.2" stroke="#4285F4" stroke-width="5.6" stroke-linecap="round"/><circle cx="5.3" cy="18.2" r="2.8" fill="#34A853"/></svg>Google Ads</span> · $4.1K/day budget · 9% IS lost to budget</p>
           </div>
           <div class="head-actions">
             <button class="btn primary">Protect campaign</button>
